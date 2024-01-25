@@ -10,7 +10,7 @@ var map = L.map('map').setView([0, 0], 13);
                 .then(response => response.text())
                 .then(data => {
                     // Process the coordinates data
-                    processData(data);
+                    processAndDisplayMarkers(data);
 
                 })
                 .catch(error => console.error('Error reading the file:', error));
