@@ -64,5 +64,6 @@
             }
         }
         while (true) {
+        setTimeout(() => {
             setInterval(updatemap, 2000)
-        }
+        }, 2000);}
