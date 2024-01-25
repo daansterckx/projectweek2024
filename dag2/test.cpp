@@ -10,7 +10,7 @@ HardwareSerial ss(2);
 TinyGPSPlus gps;
 
 // WiFi credentials
-const char* ssid = "DAANSLAPTOP";
+const char* ssid = "DAANSLAPTOP1";
 const char* password = "12345678";
 
 // Server URL
