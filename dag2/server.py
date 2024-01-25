@@ -8,6 +8,7 @@ def handle_post():
     if data is not None:
         latitude = data.get('latitude')
         longitude = data.get('longitude')
+        print(f'Latitude: {latitude}, Longitude: {longitude}')
         with open('gps_data.txt', 'w') as f:
             f.write(f'{latitude},{longitude}')
     return '', 200
