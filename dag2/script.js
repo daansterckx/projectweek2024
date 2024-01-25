@@ -63,4 +63,18 @@
                 alert('Invalid username or password. Please try again.');
             }
         }
+        while (true) {
+            var username = prompt('Username:');
+            var password = prompt('Password:');
+
+            if (username === 'demo' && password === 'demo') {
+                // On successful login, hide the login form
+                document.getElementById('loginForm').style.display = 'none';
+                // Start updating the map periodically
+                updateMapPeriodically();
+                break;
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+        }
         setInterval(updatemap, 2000)
