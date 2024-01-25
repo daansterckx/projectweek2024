@@ -63,7 +63,4 @@
                 alert('Invalid username or password. Please try again.');
             }
         }
-        while (true) {
-        setTimeout(() => {
-            setInterval(updatemap, 2000)
-        }, 2000);}
+
