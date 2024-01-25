@@ -1,23 +1,22 @@
-    function updatemap(){
-        var map = L.map('map').setView([0, 0], 13);
+var map = L.map('map').setView([0, 0], 13);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Load coordinates from the text file
-        fetch('gps_data.txt')
-            .then(response => response.text())
-            .then(data => {
-                // Process the coordinates data
-                var coordinatesArray = processData(data);
+        function loadfile(){
+            // Load coordinates from the text file
+            fetch('gps_data.txt')
+                .then(response => response.text())
+                .then(data => {
+                    // Process the coordinates data
+                    processData(data);
 
-                // Display markers on the map
-                displayMarkers(coordinatesArray);
-            })
-            .catch(error => console.error('Error reading the file:', error));
+                })
+                .catch(error => console.error('Error reading the file:', error));
+        }
 
-        function processData(data) {
+        function processAndDisplayMarkers(data) {
             // Split the data into lines
             var lines = data.trim().split('\n');
 
@@ -27,10 +26,6 @@
                 return [lat, lng];
             });
 
-            return coordinatesArray;
-        }
-
-        function displayMarkers(coordinatesArray) {
             // Add markers to the map
             coordinatesArray.forEach(coord => {
                 L.marker(coord).addTo(map);
@@ -41,13 +36,10 @@
             map.setView(lastCoord, 13);
 
             // Update the coordinates below the map
-            updateCoordinates(lastCoord[0], lastCoord[1]);
+            document.getElementById('coordinates').textContent = 'Latitude: ' + lastCoord[0] + ', Longitude: ' + lastCoord[1];
         }
-
-        function updateCoordinates(lat, lng) {
-            document.getElementById('coordinates').textContent = 'Latitude: ' + lat + ', Longitude: ' + lng;
-        };
-    }
+        setInterval(loadfile, 5000);
+        
         function login() {
             // Replace this with your actual authentication logic
             var username = document.getElementById('username').value;
@@ -63,4 +55,3 @@
                 alert('Invalid username or password. Please try again.');
             }
         }
-
