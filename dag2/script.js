@@ -5,16 +5,16 @@ var map = L.map('map').setView([0, 0], 13);
         }).addTo(map);
 
         // Load coordinates from the text file
-        fetch('gps_data.txt')
-            .then(response => response.text())
-            .then(data => {
-                // Process the coordinates data
-                var coordinatesArray = processData(data);
-
-                // Display markers on the map
-                displayMarkers(coordinatesArray);
-            })
-            .catch(error => console.error('Error reading the file:', error));
+        function updateMap() {
+            fetch('gps_data.txt')
+                .then(response => response.text())
+                .then(data => {
+                    const [latitude, longitude] = data.split(',');
+                    const newPosition = [latitude, longitude];
+                    map.setView(newPosition, 13);
+                    marker.setLatLng(newPosition);
+                });
+        }
 
         function processData(data) {
             // Split the data into lines
@@ -46,7 +46,7 @@ var map = L.map('map').setView([0, 0], 13);
         function updateCoordinates(lat, lng) {
             document.getElementById('coordinates').textContent = 'Latitude: ' + lat + ', Longitude: ' + lng;
         }
-        setInterval(myFunction, 2000);
+        setInterval(updateMap, 2000);
 
         function login() {
             // Replace this with your actual authentication logic
