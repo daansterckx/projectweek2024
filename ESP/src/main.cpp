@@ -31,29 +31,13 @@ void setup() {
   Serial.print("WebUI IP Address: ");
   Serial.println(WiFi.localIP());
 
-  // Handle CORS headers in the onRequest event
-  server.onRequest([](AsyncWebServerRequest *request){
-    request->addHeader("Access-Control-Allow-Origin", "*");
-    request->addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-    request->addHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Accept");
-    request->send(200);
-  }, NULL);
-
+  // Handle CORS preflight request
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    String html = "<html><head>";
-    html += "<meta http-equiv=\"refresh\" content=\"5\">"; // Vernieuwen elke 5 seconden
-    html += "</head><body>";
-    html += "<h1>ESP32 GPS Data</h1>";
-    
-    if (gps.location.isValid()) {
-      html += "<p>Latitude: " + String(gps.location.lat(), 6) + "</p>";
-      html += "<p>Longitude: " + String(gps.location.lng(), 6) + "</p>";
-    } else {
-      html += "<p>Location not available</p>";
-    }
-
-    html += "</body></html>";
-    request->send(200, "text/html", html);
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/html");
+    response->addHeader("Access-Control-Allow-Origin", "*");
+    response->addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+    response->addHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Accept");
+    request->send(response);
   });
 
   server.begin();
