@@ -62,23 +62,6 @@ function login() {
             }
         }
 
-// Function to toggle the buzzer state
-function toggleBuzzer() {
-    // Send a request to the ESP32 to toggle the buzzer
-    fetch('toggle_buzzer', { method: 'POST' })
-        .then(response => {
-            if (response.ok) {
-                console.log('Buzzer toggled successfully');
-            } else {
-                console.error('Failed to toggle buzzer');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-}
-
-// Add an event listener for the button click
-document.getElementById('buzzButton').addEventListener('click', toggleBuzzer);
-
 document.getElementById('buzzButton').addEventListener('click', function() {
     // Stuur een HTTP-verzoek naar de ESP32 wanneer de knop wordt ingedrukt
     fetch('http://192.168.137.153/buzzer', { method: 'POST' })
