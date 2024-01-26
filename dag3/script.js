@@ -15,7 +15,6 @@ function loadfile(){
 
             // Process the coordinates data
             processAndDisplayMarkers(data);
-
         })
         .catch(error => console.error('Error reading the file:', error));
 }

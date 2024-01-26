@@ -31,13 +31,15 @@ void setup() {
   Serial.print("WebUI IP Address: ");
   Serial.println(WiFi.localIP());
 
-  // Handle CORS preflight request
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    AsyncWebServerResponse *response = request->beginResponse(200, "text/html");
-    response->addHeader("Access-Control-Allow-Origin", "*");
-    response->addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-    response->addHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Accept");
-    request->send(response);
+  // Define CORS headers for all responses
+  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
+  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Accept");
+
+  // Handle buzzer activation request
+  server.on("/buzzer", HTTP_POST, [](AsyncWebServerRequest *request){
+    // Here, you can activate the buzzer
+    request->send(200, "text/plain", "Buzzer activated successfully!");
   });
 
   server.begin();
