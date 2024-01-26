@@ -46,18 +46,23 @@ function processAndDisplayMarkers(data) {
 setInterval(loadfile, 5000);
         
 function login() {
-    // Replace this with your actual authentication logic
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
+            // Replace this with your actual authentication logic
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
 
-    // Dummy authentication (for demonstration purposes)
-    if (username === 'demo' && password === 'demo') {
-        // On successful login, hide the login form
-        document.getElementById('loginForm').style.display = 'none';
-    } else {
-        alert('Invalid username or password. Please try again.');
-    }
-}
+            // Dummy authentication (for demonstration purposes)
+            if (username === 'demo' && password === 'demo') {
+                // On successful login, hide the login form
+                document.getElementById('loginForm').style.display = 'none';
+                // Make the map visible
+                document.getElementById('mapLogin').style.display = 'block';
+                map.invalidateSize();
+                // Start updating the map periodically
+                updateMapPeriodically();
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+        }
 
 // Function to toggle the buzzer state
 function toggleBuzzer() {
@@ -76,9 +81,9 @@ function toggleBuzzer() {
 // Add an event listener for the button click
 document.getElementById('buzzButton').addEventListener('click', toggleBuzzer);
 
-document.getElementById('controlButton').addEventListener('click', function() {
+document.getElementById('buzzButton').addEventListener('click', function() {
     // Stuur een HTTP-verzoek naar de ESP32 wanneer de knop wordt ingedrukt
-    fetch('http://esp32_ip_address/buzzer', { method: 'POST' })
+    fetch('http://192.168.137.153/buzzer', { method: 'POST' })
         .then(response => {
             if (response.ok) {
                 alert('Buzzer activated successfully!');
