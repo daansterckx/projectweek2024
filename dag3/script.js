@@ -45,7 +45,7 @@ function processAndDisplayMarkers(data) {
 }
 
 function checkAlarmState() {
-    fetch('alarm_state.txt')
+    fetch('button_state.txt')
         .then(response => response.text())
         .then(data => {
             if (data.trim() === '0') {
