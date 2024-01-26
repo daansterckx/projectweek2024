@@ -12,7 +12,7 @@ def handle_post():
         print(f'Latitude: {latitude}, Longitude: {longitude}, Alarm: {alarm}')
         with open('gps_data.txt', 'w') as f:
             f.write(f'{latitude},{longitude}')
-            f.write("/n")
+            f.write("\n")
             f.write(f'{alarm}')
     return '', 200
 
