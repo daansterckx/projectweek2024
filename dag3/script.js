@@ -4,15 +4,7 @@ var markersLayer = L.layerGroup().addTo(map); // Create a layer group for marker
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
-const socket = io();
 
-document.getElementById('alertButton').addEventListener('click', function() {
-    socket.emit('alert');
-});
-
-socket.on('alert', function() {
-    alert('Alert received!');
-});
 function loadfile(){
     // Load coordinates from the text file
     fetch('gps_data.txt')
@@ -51,7 +43,21 @@ function processAndDisplayMarkers(data) {
     // Update the coordinates below the map
     document.getElementById('coordinates').textContent = 'Latitude: ' + lastCoord[0] + ', Longitude: ' + lastCoord[1];
 }
-setInterval(loadfile, 5000);
+
+function checkAlarmState() {
+    fetch('alarm_state.txt')
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim() === '0') {
+                alert('Alert: Alarm is activated!');
+            }
+        })
+        .catch(error => console.error('Error reading the file:', error));
+}
+
+setInterval(loadfile, 2000);
+setInterval(checkAlarmState, 500);
+
         
 function login() {
             // Replace this with your actual authentication logic
