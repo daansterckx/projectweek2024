@@ -43,7 +43,7 @@ var markersLayer = L.layerGroup().addTo(map); // Create a layer group for marker
             // Update the coordinates below the map
             document.getElementById('coordinates').textContent = 'Latitude: ' + lastCoord[0] + ', Longitude: ' + lastCoord[1];
         }
-        setInterval(loadfile, 5000);
+        setInterval(loadfile, 3000);
         
         function login() {
             // Replace this with your actual authentication logic
