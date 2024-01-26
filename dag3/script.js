@@ -4,7 +4,21 @@ var markersLayer = L.layerGroup().addTo(map); // Create a layer group for marker
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
+app.use(express.static('public'));
+
+app.post('/alert', (req, res) => {
+  io.emit('alert');
+  res.sendStatus(200);
+});
+
+http.listen(80, () => {
+  console.log('Server is running');
+});
 function loadfile(){
     // Load coordinates from the text file
     fetch('gps_data.txt')
@@ -43,7 +57,7 @@ function processAndDisplayMarkers(data) {
     // Update the coordinates below the map
     document.getElementById('coordinates').textContent = 'Latitude: ' + lastCoord[0] + ', Longitude: ' + lastCoord[1];
 }
-setInterval(loadfile, 2000);
+setInterval(loadfile, 5000);
         
 function login() {
             // Replace this with your actual authentication logic
