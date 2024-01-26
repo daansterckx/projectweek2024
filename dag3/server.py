@@ -11,7 +11,7 @@ def handle_post():
         alarm = data.get('Alarm')
         print(f'Latitude: {latitude}, Longitude: {longitude}, Alarm: {alarm}')
         with open('gps_data.txt', 'w') as f:
-            f.write(f'{latitude},{longitude},{alarm}')
+            f.write(f'{latitude},{longitude}')
     return '', 200
 
 if __name__ == '__main__':
