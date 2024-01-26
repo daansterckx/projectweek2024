@@ -32,6 +32,11 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    // Add CORS headers
+    request->addHeader("Access-Control-Allow-Origin", "*");
+    request->addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+    request->addHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Accept");
+
     String html = "<html><head>";
     html += "<meta http-equiv=\"refresh\" content=\"5\">"; // Vernieuwen elke 5 seconden
     html += "</head><body>";
