@@ -31,12 +31,15 @@ void setup() {
   Serial.print("WebUI IP Address: ");
   Serial.println(WiFi.localIP());
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    // Add CORS headers
+  // Handle CORS headers in the onRequest event
+  server.onRequest([](AsyncWebServerRequest *request){
     request->addHeader("Access-Control-Allow-Origin", "*");
     request->addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
     request->addHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Accept");
+    request->send(200);
+  }, NULL);
 
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     String html = "<html><head>";
     html += "<meta http-equiv=\"refresh\" content=\"5\">"; // Vernieuwen elke 5 seconden
     html += "</head><body>";
