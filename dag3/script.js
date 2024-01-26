@@ -57,8 +57,6 @@ function login() {
                 // Make the map visible
                 document.getElementById('mapLogin').style.display = 'block';
                 map.invalidateSize();
-                // Start updating the map periodically
-                updateMapPeriodically();
             } else {
                 alert('Invalid username or password. Please try again.');
             }
