@@ -43,7 +43,7 @@ var markersLayer = L.layerGroup().addTo(map); // Create a layer group for marker
             // Update the coordinates below the map
             document.getElementById('coordinates').textContent = 'Latitude: ' + lastCoord[0] + ', Longitude: ' + lastCoord[1];
         }
-        setInterval(loadfile, 5000);
+        setInterval(loadfile, 3000);
         
         function login() {
             // Replace this with your actual authentication logic
@@ -57,9 +57,24 @@ var markersLayer = L.layerGroup().addTo(map); // Create a layer group for marker
                 // Make the map visible
                 document.getElementById('mapLogin').style.display = 'block';
                 map.invalidateSize();
-                // Start updating the map periodically
-                updateMapPeriodically();
             } else {
                 alert('Invalid username or password. Please try again.');
             }
         }
+
+// Function to toggle the buzzer state
+function toggleBuzzer() {
+    // Send a request to the ESP32 to toggle the buzzer
+    fetch('toggle_buzzer', { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                console.log('Buzzer toggled successfully');
+            } else {
+                console.error('Failed to toggle buzzer');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Add an event listener for the button click
+document.getElementById('buzzButton').addEventListener('click', toggleBuzzer);
