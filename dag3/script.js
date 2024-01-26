@@ -49,7 +49,7 @@ function checkAlarmState() {
         .then(response => response.text())
         .then(data => {
             if (data.trim() === '0') {
-                alert('Alert: Alarm is activated!');
+                alert('Kind is in nood!');
             }
         })
         .catch(error => console.error('Error reading the file:', error));
