@@ -48,18 +48,6 @@ void setup() {
     request->send(200, "text/html", html);
   });
 
-  server.on("/", HTTP_POST, [](AsyncWebServerRequest *request){
-    if (request->hasParam("value", true)) {
-      String value = request->getParam("value", true)->value();
-
-      // Check the value and perform the action
-      if (value == "0") {
-        // Code to trigger the buzzer goes here
-      }
-    }
-    request->send(200);
-  });
-
   server.begin();
 }
 
