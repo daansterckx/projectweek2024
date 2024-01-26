@@ -103,7 +103,7 @@ void loop() {
       } else {
         Serial.println("Location: Not Available");
       }
-      delay(1000);
+      delay(500);
     }
   }
 }
