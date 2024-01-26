@@ -38,7 +38,10 @@ void setup() {
 
   // Handle buzzer activation request
   server.on("/buzzer", HTTP_POST, [](AsyncWebServerRequest *request){
-    // Here, you can activate the buzzer
+    // Activate the buzzer
+    digitalWrite(buzzerPin, HIGH);
+    delay(2000); // Buzz for 1 second
+    digitalWrite(buzzerPin, LOW); // Turn off the buzzer
     request->send(200, "text/plain", "Buzzer activated successfully!");
   });
 
