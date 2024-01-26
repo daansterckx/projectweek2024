@@ -78,7 +78,7 @@ function login() {
 
 document.getElementById('buzzButton').addEventListener('click', function() {
     // Stuur een HTTP-verzoek naar de ESP32 wanneer de knop wordt ingedrukt
-    fetch('http://192.168.137.153/buzzer', { method: 'POST' })
+    fetch('http://192.168.137.141/buzzer', { method: 'POST' })
         .then(response => {
             if (response.ok) {
                 alert('Buzzer activated successfully!');
