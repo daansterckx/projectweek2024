@@ -80,13 +80,13 @@ document.getElementById('buzzButton').addEventListener('click', function() {
     fetch('http://192.168.137.141/buzzer', { method: 'POST' })
         .then(response => {
             if (response.ok) {
-                alert('Buzzer activated successfully!');
+                alert('Kinderen worden aangeroepen!');
             } else {
-                alert('Failed to activate the buzzer.');
+                alert('Er is een fout opgetreden met he aanroepen!');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Failed to activate the buzzer.');
+            alert('Er is een onbekende fout opgetreden!');
         });
 });
