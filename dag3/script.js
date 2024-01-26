@@ -4,20 +4,14 @@ var markersLayer = L.layerGroup().addTo(map); // Create a layer group for marker
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
-const express = require('express');
-const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const socket = io();
 
-app.use(express.static('public'));
-
-app.post('/alert', (req, res) => {
-  io.emit('alert');
-  res.sendStatus(200);
+document.getElementById('alertButton').addEventListener('click', function() {
+    socket.emit('alert');
 });
 
-http.listen(80, () => {
-  console.log('Server is running');
+socket.on('alert', function() {
+    alert('Alert received!');
 });
 function loadfile(){
     // Load coordinates from the text file
