@@ -80,9 +80,9 @@ document.getElementById('buzzButton').addEventListener('click', function() {
     fetch('http://192.168.137.141/buzzer', { method: 'POST' })
         .then(response => {
             if (response.ok) {
-                alert('Kinderen worden aangeroepen!');
+                alert('Kinderen worden opgeroepen!');
             } else {
-                alert('Er is een fout opgetreden met he aanroepen!');
+                alert('Er is een fout opgetreden met het oproepen!');
             }
         })
         .catch(error => {
