@@ -75,16 +75,8 @@ void loop() {
   // Controleer of de knop is ingedrukt
   if (digitalRead(buttonPin) == LOW) {
     Serial.println("Kind in nood!");
-
-    // Activeer de zoemer
-    digitalWrite(buzzerPin, HIGH);
-    delay(100);
-
     // Voeg eventuele extra acties toe die je wilt uitvoeren wanneer de knop wordt ingedrukt
     delay(500);
-
-    // Deactiveer de zoemer
-    digitalWrite(buzzerPin, LOW);
   }
 
   // Controleer of er GPS-gegevens beschikbaar zijn
