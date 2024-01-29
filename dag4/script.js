@@ -105,7 +105,7 @@ function login() {
         document.getElementById('loginForm').style.display = 'none';
         // Make the map visible
         document.getElementById('mapLogin').style.display = 'block';
-        initMap();
+        // initMap();
         map.invalidateSize();
     } else {
         alert('Invalid username or password. Please try again.');
