@@ -129,7 +129,7 @@ document.getElementById('buzzButton').addEventListener('click', function() {
 });
 
 function connect() {
-    document.getElementById('connectbButton').style.display = 'block';
+    document.getElementById('connectButton').style.display = 'block';
 }
 
 function disconnect() {
