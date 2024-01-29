@@ -31,3 +31,6 @@ def measure_distance():
     distance = round(distance, 2)
 
     return distance
+while True:
+    distance = measure_distance()
+    print(f"Distance: {distance} cm")
