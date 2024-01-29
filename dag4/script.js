@@ -96,6 +96,7 @@ setInterval(loadfile, 2000);
 setInterval(checkAlarmState, 500);
 
 function login() {
+    console.log("works")
     // Replace this with your actual authentication logic
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
@@ -106,8 +107,8 @@ function login() {
         document.getElementById('loginForm').style.display = 'none';
         // Make the map visible
         document.getElementById('mapLogin').style.display = 'block';
-        // initMap();
         map.invalidateSize();
+        initMap();
     } else {
         alert('Invalid username or password. Please try again.');
     }
@@ -130,9 +131,9 @@ document.getElementById('buzzButton').addEventListener('click', function() {
 });
 
 function connect() {
-    document.getElementById('map').style.display = 'block';
+    document.getElementById('map coordinates').style.display = 'block';
 }
 
 function disconnect() {
-    document.getElementById('map').style.display = 'none';
+    document.getElementById('map coordinates').style.display = 'none';
 }
