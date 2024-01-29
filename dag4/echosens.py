@@ -1,7 +1,10 @@
-import OPi.GPIO as GPIO
+import OPi.GPIO as GPIO 
 import time
 
+
+
 # Set the GPIO mode
+GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD)
 
 # Define the GPIO pins for the ultrasonic sensor
