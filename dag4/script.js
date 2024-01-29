@@ -129,9 +129,9 @@ document.getElementById('buzzButton').addEventListener('click', function() {
 });
 
 function connect() {
-    document.getElementById('map').style.display = 'block';
+    document.getElementById('map coordinates').style.display = 'block';
 }
 
 function disconnect() {
-    document.getElementById('map').style.display = 'none';
+    document.getElementById('map coordinates').style.display = 'none';
 }
