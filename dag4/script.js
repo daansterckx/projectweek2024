@@ -2,19 +2,9 @@ var map;
 var markersLayer = L.layerGroup().addTo(map); // Create a layer group for markers
 var circle; // Variable to hold the circle representing the alert zone
 
-function initMap() {
-    map = L.map('map').setView([51.16557, 4.98917], 20); // Set the initial map view
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-    // Add a layer group for markers
-    markersLayer = L.layerGroup().addTo(map);
-
-    // Set the map view to the center of the alert zone
-    map.setView([51.16177, 4.962233], 20);
-
-    // Update the coordinates below the map
-    document.getElementById('coordinates').textContent = 'Latitude: ' + 51.16557 + ', Longitude: ' + 4.98917;
-}
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
 
 function loadfile() {
     // Load coordinates from the text file
