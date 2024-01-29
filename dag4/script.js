@@ -105,8 +105,6 @@ function login() {
         document.getElementById('loginForm').style.display = 'none';
         // Make the map visible
         document.getElementById('mapLogin').style.display = 'block';
-        // Set the display of radius buttons to 'block'
-        document.getElementById('radiusBtn').style.display = 'block';
         initMap();
         map.invalidateSize();
     } else {
