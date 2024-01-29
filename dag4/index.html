@@ -36,9 +36,10 @@
 
 <!-- Map container -->
 <div id="mapLogin" class="container mt-4" style="display: none;">
-    <div id="map" style="height: 400px;"></div>
-    <p id="coordinates" class="mt-3">Latitude: N/A, Longitude: N/A</p>
-    
+    <div id="removeMap">
+        <div id="map" style="height: 400px;"></div>
+        <p id="coordinates" class="mt-3">Latitude: N/A, Longitude: N/A</p>
+    </div>
     <!-- Buttons for Connecting and Disconnecting -->
     <div class="d-flex justify-content-between ">
         <button id="connectButton" class="btn btn-primary btn-smaller m-2" onclick="connect()">Connect</button>
