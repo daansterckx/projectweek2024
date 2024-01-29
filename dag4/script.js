@@ -1,4 +1,4 @@
-var map;
+var map = L.map('map').setView([0, 0], 20);
 var markersLayer = L.layerGroup().addTo(map); // Create a layer group for markers
 var circle; // Variable to hold the circle representing the alert zone
 
@@ -6,7 +6,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-function loadfile() {
+function loadfile(){
     // Load coordinates from the text file
     fetch('gps_data.txt')
         .then(response => response.text())
@@ -104,7 +104,7 @@ function login() {
         document.getElementById('loginForm').style.display = 'none';
         // Make the map visible
         document.getElementById('mapLogin').style.display = 'block';
-        initMap();
+        map.invalidateSize();
     } else {
         alert('Invalid username or password. Please try again.');
     }

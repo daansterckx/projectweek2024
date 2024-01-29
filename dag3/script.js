@@ -32,7 +32,6 @@ function processAndDisplayMarkers(data) {
     // Add markers to the map
     coordinatesArray.forEach(coord => {
         L.marker(coord).addTo(markersLayer);
-
     });
 
     // Set the map view to the last coordinates
@@ -56,8 +55,7 @@ function checkAlarmState() {
 
 setInterval(loadfile, 2000);
 setInterval(checkAlarmState, 500);
-
-        
+    
 function login() {
             // Replace this with your actual authentication logic
             var username = document.getElementById('username').value;
