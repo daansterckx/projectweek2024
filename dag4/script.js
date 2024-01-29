@@ -46,6 +46,7 @@ function processAndDisplayMarkers(data) {
     if (circle && map.distance(lastCoord, circle.getLatLng()) > circle.getRadius()) {
         // If marker crosses the border, trigger an alert
         alert('Kind is in een verbodenzone!');
+        setTimeout(2000);
     }
 }
 
