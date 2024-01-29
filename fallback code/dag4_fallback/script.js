@@ -1,22 +1,12 @@
-var map;
+var map = L.map('map').setView([0, 0], 20);
 var markersLayer = L.layerGroup().addTo(map); // Create a layer group for markers
 var circle; // Variable to hold the circle representing the alert zone
 
-function initMap() {
-    map = L.map('map').setView([51.16557, 4.98917], 20); // Set the initial map view
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
 
-    // Add a layer group for markers
-    markersLayer = L.layerGroup().addTo(map);
-
-    // Set the map view to the center of the alert zone
-    map.setView([51.16177, 4.962233], 20);
-
-    // Update the coordinates below the map
-    document.getElementById('coordinates').textContent = 'Latitude: ' + 51.16557 + ', Longitude: ' + 4.98917;
-}
-
-function loadfile() {
+function loadfile(){
     // Load coordinates from the text file
     fetch('gps_data.txt')
         .then(response => response.text())
@@ -55,7 +45,7 @@ function processAndDisplayMarkers(data) {
     // Check if the marker position crosses the border
     if (circle && map.distance(lastCoord, circle.getLatLng()) > circle.getRadius()) {
         // If marker crosses the border, trigger an alert
-        alert('Marker crossed the border!');
+        alert('Kind is in een verbodenzone!');
     }
 }
 
@@ -114,7 +104,7 @@ function login() {
         document.getElementById('loginForm').style.display = 'none';
         // Make the map visible
         document.getElementById('mapLogin').style.display = 'block';
-        initMap();
+        map.invalidateSize();
     } else {
         alert('Invalid username or password. Please try again.');
     }
@@ -122,7 +112,7 @@ function login() {
 
 document.getElementById('buzzButton').addEventListener('click', function() {
     // Stuur een HTTP-verzoek naar de ESP32 wanneer de knop wordt ingedrukt
-    fetch('http://192.168.137.7/buzzer', { method: 'POST' })
+    fetch('http://192.168.137.17/buzzer', { method: 'POST' })
         .then(response => {
             if (response.ok) {
                 alert('Kinderen worden opgeroepen!');
