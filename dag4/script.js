@@ -91,8 +91,8 @@ function checkAlarmState() {
         .catch(error => console.error('Error reading the file:', error));
 }
 
-setInterval(loadfile, 2000);
-setInterval(checkAlarmState, 500);
+setInterval(loadfile, 1000);
+setInterval(checkAlarmState, 100);
 
 function login() {
     console.log("works")
