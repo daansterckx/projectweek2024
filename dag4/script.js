@@ -45,7 +45,7 @@ function processAndDisplayMarkers(data) {
     // Check if the marker position crosses the border
     if (circle && map.distance(lastCoord, circle.getLatLng()) > circle.getRadius()) {
         // If marker crosses the border, trigger an alert
-        alert('Marker crossed the border!');
+        alert('Kind is in een verbodenzone!');
     }
 }
 
