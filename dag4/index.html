@@ -34,15 +34,24 @@
             </div>
         </form>
 
-         <!-- Map container -->
-         <div id="mapLogin" class="mt-4" style="display: none;">
+        <!-- Map container -->
+        <div id="mapLogin" class="mt-4" style="display: none;">
             <div id="map+cords">
                 <div id="map" style="height: 400px;"></div>
-                    <p id="coordinates" class="mt-3">Latitude: N/A, Longitude: N/A</p>
+                <p id="coordinates" class="mt-3">Latitude: N/A, Longitude: N/A</p>
             </div>
             <div class="d-md-flex justify-content-md-between mx-auto">
+                <div class="input-group mb-3">
+                    <input type="number" id="radiusInput" class="form-control" placeholder="Set Radius">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="button" onclick="setRadius()">Set</button>
+                    </div>
+                </div>
                 <button id="connectButton" class="btn btn-success btn-smaller m-4" onclick="connect()">Connect</button>
-                <button id="buzzButton" class="btn btn-primary btn-smaller m-4">Verzamelen</button>
+                <button id="buzzButton" class="btn btn-primary btn-block m-4">Verzamelen</button>
+                    <div class="input-group-append">
+                        <button class="btn btn-danger" type="button" onclick="removeRadius()">Remove</button>
+                    </div>
                 <button id="disconnectButton" class="btn btn-danger btn-smaller m-4" onclick="disconnect()">Disconnect</button>
             </div>
         </div>
@@ -59,6 +68,6 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script src="test.js"></script>
 </body>
 </html>
