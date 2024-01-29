@@ -41,16 +41,6 @@ function processAndDisplayMarkers(data) {
 
     // Update the coordinates below the map
     document.getElementById('coordinates').textContent = 'Latitude: ' + lastCoord[0] + ', Longitude: ' + lastCoord[1];
-
-    // Check if the marker position crosses the border
-    if (circle && map.distance(lastCoord, circle.getLatLng()) > circle.getRadius()) {
-        // If marker crosses the border, trigger an alert
-        alert('Kind is in een verbodenzone!');
-        setTimeout(function() {
-            // The code inside this function will be executed after 3 seconds
-            console.log('Waiting for 3 seconds...');
-        }, 3000);
-    }
 }
 
 function setRadius() {
@@ -95,8 +85,17 @@ function checkAlarmState() {
         .catch(error => console.error('Error reading the file:', error));
 }
 
-setInterval(loadfile, 2000);
-setInterval(checkAlarmState, 500);
+function borderCheck() {
+    // Check if the marker position crosses the border
+    if (circle && map.distance(lastCoord, circle.getLatLng()) > circle.getRadius()) {
+        // If marker crosses the border, trigger an alert
+        alert('Kind is in een verbodenzone!');
+    }
+}
+
+setInterval(loadfile, 1000);
+setInterval(checkAlarmState, 1000);
+setInterval(borderCheck,3000)
 
 function login() {
     console.log("works")
