@@ -1,12 +1,40 @@
 var map = L.map('map').setView([0, 0], 20);
 var markersLayer = L.layerGroup().addTo(map); // Create a layer group for markers
 var circle; // Variable to hold the circle representing the alert zone
+var drawnItems = new L.FeatureGroup().addTo(map); // Create a layer group for drawn items
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-function loadfile(){
+// Initialize the draw control
+var drawControl = new L.Control.Draw({
+    edit: {
+        featureGroup: drawnItems
+    },
+    draw: {
+        polygon: true,
+        circle: false,
+        rectangle: false,
+        marker: false,
+        polyline: false
+    }
+});
+map.addControl(drawControl);
+
+// Handle draw created event
+map.on(L.Draw.Event.CREATED, function (event) {
+    var layer = event.layer;
+    drawnItems.addLayer(layer);
+});
+
+// Handle draw edited event
+map.on(L.Draw.Event.EDITED, function (event) {
+    var layers = event.layers;
+    // Do something with the edited layers
+});
+
+function loadfile() {
     // Load coordinates from the text file
     fetch('gps_data.txt')
         .then(response => response.text())
@@ -20,6 +48,8 @@ function loadfile(){
         .catch(error => console.error('Error reading the file:', error));
 }
 
+var alertedMarkers = new Set();
+
 function processAndDisplayMarkers(data) {
     // Split the data into lines
     var lines = data.trim().split('\n');
@@ -32,7 +62,20 @@ function processAndDisplayMarkers(data) {
 
     // Add markers to the map
     coordinatesArray.forEach(coord => {
-        L.marker(coord).addTo(markersLayer);
+        var marker = L.marker(coord).addTo(markersLayer);
+
+        // Check if the marker is outside the drawn area
+        if (!isMarkerInsideDrawableArea(marker) && !alertedMarkers.has(marker)) {
+            alert('Marker is outside the drawable zone!');
+            alertedMarkers.add(marker); // Add the marker to the set to prevent repeated alerts
+        }
+
+        // Check if the marker position crosses the border of the circle or the drawn area
+        if ((circle && map.distance(coord, circle.getLatLng()) > circle.getRadius()) ||
+            (!isMarkerInsideDrawableArea(marker))) {
+            // If marker crosses the border, trigger an alert
+            alert('Kind is in een verbodenzone!');
+        }
     });
 
     // Set the map view to the last coordinates
@@ -41,12 +84,16 @@ function processAndDisplayMarkers(data) {
 
     // Update the coordinates below the map
     document.getElementById('coordinates').textContent = 'Latitude: ' + lastCoord[0] + ', Longitude: ' + lastCoord[1];
+}
 
-    // Check if the marker position crosses the border
-    if (circle && map.distance(lastCoord, circle.getLatLng()) > circle.getRadius()) {
-        // If marker crosses the border, trigger an alert
-        alert('Kind is in een verbodenzone!');
-    }
+function isMarkerInsideDrawableArea(marker) {
+    // Get the marker coordinates
+    var markerCoord = marker.getLatLng();
+
+    // Check if the marker is inside the drawn area
+    var isInside = drawnItems.getBounds().contains(markerCoord);
+    
+    return isInside;
 }
 
 function setRadius() {
@@ -76,7 +123,11 @@ function removeRadius() {
     // Remove existing circle if any
     if (circle) {
         map.removeLayer(circle);
+        circle = null; // Reset de referentie naar de cirkel
     }
+
+    // Remove existing drawn items
+    drawnItems.clearLayers();
 }
 
 function checkAlarmState() {
@@ -125,11 +176,3 @@ document.getElementById('buzzButton').addEventListener('click', function() {
             alert('Er is een onbekende fout opgetreden!');
         });
 });
-
-function connect() {
-    document.getElementById('map+cords').style.display = 'block';
-}
-
-function disconnect() {
-    document.getElementById('map+cords').style.display = 'none';
-}
