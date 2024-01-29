@@ -95,7 +95,7 @@ function borderCheck() {
 
 setInterval(loadfile, 1000);
 setInterval(checkAlarmState, 1000);
-setInterval(borderCheck,3000)
+setInterval(borderCheck,10000)
 
 function login() {
     console.log("works")
