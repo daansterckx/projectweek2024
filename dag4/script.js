@@ -42,13 +42,10 @@ function processAndDisplayMarkers(data) {
     // Update the coordinates below the map
     document.getElementById('coordinates').textContent = 'Latitude: ' + lastCoord[0] + ', Longitude: ' + lastCoord[1];
 
-     // Check if the circle exists before calculating the distance
-     if (circle) {
-        // Check if the marker position crosses the border
-        if (map.distance(lastCoord, circle.getLatLng()) > circle.getRadius()) {
-            // If marker crosses the border, trigger an alert
-            alert('Kind is in een verbodenzone!');
-        }
+    // Check if the marker position crosses the border
+    if (circle && map.distance(lastCoord, circle.getLatLng()) > circle.getRadius()) {
+        // If marker crosses the border, trigger an alert
+        alert('Kind is in een verbodenzone!');
     }
 }
 
@@ -79,6 +76,7 @@ function removeRadius() {
     // Remove existing circle if any
     if (circle) {
         map.removeLayer(circle);
+        circle = null;  // Set circle to null after removing it
     }
 }
 
