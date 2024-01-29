@@ -129,9 +129,9 @@ document.getElementById('buzzButton').addEventListener('click', function() {
 });
 
 function connect() {
-    document.getElementById('map+cords').style.display = 'block';
+    document.getElementById('connectbButton').style.display = 'block';
 }
 
 function disconnect() {
-    document.getElementById('map+cords').style.display = 'none';
+    document.getElementById('disconnectButton').style.display = 'none';
 }
