@@ -69,8 +69,10 @@ function processAndDisplayMarkers(data) {
             alert('Marker is outside the drawable zone!');
             alertedMarkers.add(marker); // Add the marker to the set to prevent repeated alerts
         }
+    });
 
-        // Check if the marker position crosses the border of the circle or the drawn area
+    // Check if the marker position crosses the border of the circle or the drawn area
+    coordinatesArray.forEach(coord => {
         if ((circle && map.distance(coord, circle.getLatLng()) > circle.getRadius()) ||
             (!isMarkerInsideDrawableArea(marker))) {
             // If marker crosses the border, trigger an alert
