@@ -92,7 +92,7 @@ function checkAlarmState() {
 }
 
 setInterval(loadfile, 1000);
-setInterval(checkAlarmState, 100);
+setInterval(checkAlarmState, 1000);
 
 function login() {
     console.log("works")
