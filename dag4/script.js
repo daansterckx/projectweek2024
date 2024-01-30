@@ -76,7 +76,6 @@ function removeRadius() {
     // Remove existing circle if any
     if (circle) {
         map.removeLayer(circle);
-        circle = null;  // Set circle to null after removing it
     }
 }
 
@@ -91,11 +90,10 @@ function checkAlarmState() {
         .catch(error => console.error('Error reading the file:', error));
 }
 
-setInterval(loadfile, 1000);
-setInterval(checkAlarmState, 1000);
+setInterval(loadfile, 2000);
+setInterval(checkAlarmState, 500);
 
 function login() {
-    console.log("works")
     // Replace this with your actual authentication logic
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
@@ -107,7 +105,6 @@ function login() {
         // Make the map visible
         document.getElementById('mapLogin').style.display = 'block';
         map.invalidateSize();
-        initMap();
     } else {
         alert('Invalid username or password. Please try again.');
     }
@@ -130,9 +127,9 @@ document.getElementById('buzzButton').addEventListener('click', function() {
 });
 
 function connect() {
-    document.getElementById('map coordinates').style.display = 'block';
+    document.getElementById('map+cords').style.display = 'block';
 }
 
 function disconnect() {
-    document.getElementById('map coordinates').style.display = 'none';
+    document.getElementById('map+cords').style.display = 'none';
 }
