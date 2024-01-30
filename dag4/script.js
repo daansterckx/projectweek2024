@@ -76,7 +76,6 @@ function removeRadius() {
     // Remove existing circle if any
     if (circle) {
         map.removeLayer(circle);
-        circle = null;  // Set circle to null after removing it
     }
 }
 
